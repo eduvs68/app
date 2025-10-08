@@ -21,6 +21,7 @@ public class Produto {
     private Double preco;
     private Integer estoque;
     private Boolean destaque;
+    @Enumerated(EnumType.STRING)
     private Categoria categoria;
     @ManyToMany(mappedBy = "produtos")
     private List<Produto> produtos;
