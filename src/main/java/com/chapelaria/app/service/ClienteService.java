@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.chapelaria.app.model.Cliente;
 import com.chapelaria.app.repository.ClienteRepository;
+import com.chapelaria.app.service.EmailService;
 
 @Service
 public class ClienteService {

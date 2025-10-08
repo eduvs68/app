@@ -33,6 +33,7 @@ public class ClienteController {
 
     @PostMapping
     public Cliente criar(@RequestBody Cliente cliente){
+        emailService.enviarEmailConfirm(clienteSalvo.getEmail(), clienteSalvo.getNome(), clienteSalvo.getId());
         return service.salvar(cliente);
     }
 
@@ -46,8 +47,4 @@ public class ClienteController {
         service.remover(id);
     }
 
-    
-
-    
-    
 }
