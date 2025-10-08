@@ -18,8 +18,11 @@ import com.chapelaria.app.service.PedidoService;
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
+
     @Autowired
     private PedidoService service;
+    @Autowired
+    private EmailService emailService; 
 
     @GetMapping
     public List<Pedido> listarTodos(){
@@ -38,7 +41,13 @@ public class PedidoController {
 
     @PostMapping
     public Pedido criar(@RequestBody Pedido pedido){
-        return service.criar(pedido);
+        Pedido pedidoSalvo = service.salvarPedido(pedido);
+        emailService.enviarEmailConfirmPedido(
+            pedidoSalvo.getCliente().getEmail(),
+            pedidoSalvo.getCliente().getNome(),
+            pedidoSalvo.getId()
+        );
+        return pedidoSalvo
     }
 
     @PutMapping("/{id}")

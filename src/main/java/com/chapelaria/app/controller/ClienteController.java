@@ -19,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
+
     @Autowired
     private ClienteService service;
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping
     public List<Cliente> listar(){
         return service.listarTodos();
@@ -33,8 +37,13 @@ public class ClienteController {
 
     @PostMapping
     public Cliente criar(@RequestBody Cliente cliente){
-        emailService.enviarEmailConfirm(clienteSalvo.getEmail(), clienteSalvo.getNome(), clienteSalvo.getId());
-        return service.salvar(cliente);
+        Cliente clienteSalvo = service.salvar(cliente);
+        emailService.enviarEmailConfirm(
+            clienteSalvo.getEmail(), 
+            clienteSalvo.getNome(), 
+            clienteSalvo.getId()
+        );
+        return clienteSalvo;
     }
 
     @PutMapping("/{id}")
