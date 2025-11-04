@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
+    
     @Autowired
     private ClienteService service;
+
+
     @GetMapping
     public List<Cliente> listar(){
         return service.listarTodos();

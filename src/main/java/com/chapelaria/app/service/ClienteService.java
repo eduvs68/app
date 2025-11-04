@@ -10,43 +10,45 @@ import com.chapelaria.app.repository.ClienteRepository;
 @Service
 public class ClienteService {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepository repository;
 
     public Cliente salvar(Cliente cliente){
         cliente.setIsAtivo(false);
-        return clienteRepository.save(cliente);
+        cliente.setToken(UUID.randomUUID().toString());
+
+        return repository.save(cliente);
     }
 
     public Cliente alterar(Long id,Cliente cliente) {
-        Cliente ce = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não existe!"));
+        Cliente ce = repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não existe!"));
         ce.setNome(cliente.getNome());
         ce.setEmail(cliente.getEmail());
         ce.setSenha(cliente.getSenha());
         ce.setIsAtivo(cliente.getIsAtivo());
-        return clienteRepository.save(ce);
+        return repository.save(ce);
     }
 
     public void remover(Long id){
-        clienteRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     public Optional<Cliente> buscarPorCodigo(Long id){
-        return clienteRepository.findById(id);
+        return repository.findById(id);
     }
 
     public List<Cliente> listarTodos(){
-        return clienteRepository.findAll();
+        return repository.findAll();
     }
 
    // public Optional<Cliente> fazerLogin(String email, String senha){
-     //   return clienteRepository.findByEmailESenha(email, senha);
+     //   return clienteRepository.findByEmailAndSenha(email, senha);
     //}
 
     public boolean ativarCliente(String token){
-        Optional<Cliente> cliente = clienteRepository.findByToken(token);
+        Optional<Cliente> cliente = repository.findByToken(token);
         if(cliente.isPresent()){
             cliente.get().setIsAtivo(true);
-            clienteRepository.save(cliente.get());
+            repository.save(cliente.get());
             return true;
         }
         return false;
