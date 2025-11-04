@@ -23,7 +23,7 @@ public class ClienteService {
         ce.setEmail(cliente.getEmail());
         ce.setSenha(cliente.getSenha());
         ce.setIsAtivo(cliente.getIsAtivo());
-        return clienteRepository.save(cliente);
+        return clienteRepository.save(ce);
     }
 
     public void remover(Long id){
@@ -38,9 +38,9 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Optional<Cliente> fazerLogin(String email, String senha){
-        return clienteRepository.findByEmailESenha(email, senha);
-    }
+   // public Optional<Cliente> fazerLogin(String email, String senha){
+     //   return clienteRepository.findByEmailESenha(email, senha);
+    //}
 
     public boolean ativarCliente(String token){
         Optional<Cliente> cliente = clienteRepository.findByToken(token);

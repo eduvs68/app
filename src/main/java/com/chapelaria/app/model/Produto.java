@@ -1,7 +1,6 @@
 package com.chapelaria.app.model;
 
 import com.chapelaria.app.Enum.Categoria;
-import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +21,5 @@ public class Produto {
     private Integer estoque;
     private Boolean destaque;
     private Categoria categoria;
-    @ManyToMany(mappedBy = "produtos")
-    private List<Produto> produtos;
 }
 

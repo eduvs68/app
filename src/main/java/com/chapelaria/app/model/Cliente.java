@@ -22,6 +22,6 @@ public class Cliente {
     private String email;
     private String senha;
     private Boolean isAtivo;
-    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
 }
