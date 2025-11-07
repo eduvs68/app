@@ -64,8 +64,8 @@ public class PedidoService {
         return repository.findAll();
     }
 
-    public List<Pedido> listarPorCliente(Long clienteiD){
-        return repository.findByClienteId(clienteiD);
+    public List<Pedido> listarPorCliente(Long codCliente){
+        return repository.findByClienteCodCliente(codCliente);
     }
 
 }
